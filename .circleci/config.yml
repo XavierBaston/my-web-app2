@@ -7,12 +7,18 @@ jobs:
 
     steps:
       - checkout
+
       - run:
-          name: Build project
-          command: echo "Build successful"
+          name: Verify web app
+          command: |
+            test -s index.html
+            grep -q "my-web-app2" index.html
+
+      - setup_remote_docker
+
       - run:
-          name: Run tests
-          command: echo "Tests successful"
+          name: Build Docker image
+          command: docker build --tag my-web-app2:${CIRCLE_SHA1} .
 
 workflows:
   build-and-test:
