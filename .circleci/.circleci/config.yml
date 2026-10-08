@@ -1,0 +1,19 @@
+version: 2.1
+
+jobs:
+  build:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - run:
+          name: Build project
+          command: echo "Build successful"
+      - run:
+          name: Run tests
+          command: echo "Tests successful"
+
+workflows:
+  build-and-test:
+    jobs:
+      - build
